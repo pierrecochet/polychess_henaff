@@ -1,4 +1,4 @@
-# PolyChess
+﻿# PolyChess
 
 PolyChess (named polychess as Git repository) is a Chess engine written in Python and used as practicals for a course on project management at the engineering school Polytech Annecy-Chambéry. 
 
@@ -48,3 +48,5 @@ Board representation and legal moves are no longer provided by python-chess but 
 * Perft
 
 
+
+TESTESTEST
