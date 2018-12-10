@@ -1,7 +1,6 @@
 #python-chess import
 #https://github.com/niklasf/python-chess
-import chess
-
+from python_chess import chess
 #set the board to its initial position
 #corresponding to: rnbqkbnr/pppppppp/8/8/8/8/PPPPPPPP/RNBQKBNR w KQkq - 0 1
 board = chess.Board()
@@ -22,9 +21,7 @@ print(moves.count())
 for move in moves: 
     
     #display the move
-    print(move)
-    
-    #save the current position
+    print(move)    #save the current position
     current_board = board
     
     #do the move
