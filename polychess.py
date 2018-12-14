@@ -51,7 +51,6 @@ def playMove(currentBoard,moveUci):
     currentBoard.push(moveToDo)
 
 board=chess.Board()
-findRandomMovePolyglot(board)
 tour=1
 print(board)
 
@@ -67,14 +66,18 @@ print(board)
 #    print(board)
 #    tour+=1
 
+
+
 # ALGORITHME QUI FAIT JOUER L'ALGORITHME POLYGLOT CONTRE UN BOT "ALEATOIRE" 
 while (findRandomMovePolyglot(board) is not None):
     print("----------------------")
     if(tour%2==0):
-        print("TOUR NOIR : ", findRandomMovePolyglot(board)[1])
+        randomMove=findRandomMovePolyglot(board)
+        print("TOUR NUMERO",tour,"NOIR : ", randomMove[1])
+        playMove(board,randomMove[0])
     else:
-        print("TOUR BLANC : ", findRandomMovePolyglot(board)[1])
-    playMove(board,findRandomMovePolyglot(board)[0])
+        print("TOUR NUMERO",tour,"BLANC : ", findBestMovePolyglot(board)[1])
+        playMove(board,findBestMovePolyglot(board)[0])
     print(board)
     tour+=1
     

@@ -7,7 +7,7 @@ import chess.polyglot
 
 #set the initial position
 board1 = chess.Board("rnbqkbnr/pppppppp/8/8/8/8/PPPPPPPP/RNBQKBNR w KQkq - 0 1")
-board2 = chess.Board("rnbqkbnr/pppppppp/8/8/3P4/8/PPP1PPPP/RNBQKBNR b KQkq - 0 1")
+board2 = chess.Board('rn1q1rk1/pppbb1pp/4pn2/3p1p2/2PP4/BP3NP1/P3PPBP/RN1Q1RK1 b - - 2 8')
 
 #access the Polyglot book
 with chess.polyglot.open_reader("bookfish.bin") as reader:
