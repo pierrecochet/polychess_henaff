@@ -56,8 +56,8 @@ def findRandomMove(board):
     """
     #get all the legal moves for the current position
     moves = board.legal_moves
-    moveToPlay= random.randrange(0, len(moves))
-    return moves[moveToPlay]
+    moveToPlay= random.randrange(0, moves.count())
+    #return 
 
 
 def playMove(currentBoard,moveUci):
@@ -82,7 +82,7 @@ print(board)
 
 
 
-# ALGORITHME QUI FAIT JOUER L'ALGORITHME POLYGLOT CONTRE UN BOT "ALEATOIRE" 
+# ALGORITHME QUI FAIT JOUER L'ALGORITHME POLYGLOT CONTRE UN BOT "ALEATOIRE" QUI UTILISE POLYGLOT
 #while (findRandomMovePolyglot(board) is not None):
 #    print("----------------------")
 #    if(tour%2==0):
@@ -95,18 +95,18 @@ print(board)
 #    print(board)
 #    tour+=1
     
-# ALGORITHME QUI FAIT JOUER L'ALGORITHME POLYGLOT CONTRE UN BOT "ALEATOIRE" 
-#while (findRandomMovePolyglot(board) is not None):
-#    print("----------------------")
-#    if(tour%2==0):
-#        randomMove=findRandomMovePolyglot(board)
-#        print("TOUR NUMERO",tour,"NOIR : ", randomMove[1])
-#        playMove(board,randomMove[0])
-#    else:
-#        print("TOUR NUMERO",tour,"BLANC : ", findBestMovePolyglot(board)[1])
-#        playMove(board,findBestMovePolyglot(board)[0])
-#    print(board)
-#    tour+=1
+# ALGORITHME QUI FAIT JOUER L'ALGORITHME POLYGLOT CONTRE UN BOT "ALEATOIRE" COMPLETEMENT
+while (findRandomMovePolyglot(board) is not None):
+    print("----------------------")
+    if(tour%2==0):
+        randomMove=findRandomMove(board)
+        print("TOUR NUMERO",tour,"NOIR : ")
+        playMove(board,randomMove)
+    else:
+        print("TOUR NUMERO",tour,"BLANC : ", findBestMovePolyglot(board)[1])
+        playMove(board,findBestMovePolyglot(board)[0])
+    print(board)
+    tour+=1
 
 
 # Make the move
@@ -115,7 +115,7 @@ print(board)
 
 
 #how many moves are available?
-print(moves.count())
+#print(moves.count())
 
 #iterate over all the moves
 #for move in moves: 
