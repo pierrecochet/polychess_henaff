@@ -1,24 +1,19 @@
 #python-chess import
 #https://github.com/niklasf/python-chess
 import chess
-
 #used to access Polyglot book
 import chess.polyglot
-#set the board to its initial position
-#corresponding to: rnbqkbnr/pppppppp/8/8/8/8/PPPPPPPP/RNBQKBNR w KQkq - 0 1
-
-#print the board on the console
-
-#print(board.fen)
+import random
 
 
-#SVG render for the board is possible in Jupyter Notebook
-#board
-
-#get all the legal moves for the current position
-#moves = board.legal_moves
-
-def findMovePolyglot(board):
+def findBestMovePolyglot(board):
+    """
+    Fonction qui renvoie le meilleur move a jouer parmi la liste des moves jouables, d'apres Polyglot
+    Paramatres :
+        -board : le board actuel (qui contient le tour a jouer)
+    Retourne :
+        -List[move a jouer, poids du move, learn]
+    """
     #access the Polyglot book
     with chess.polyglot.open_reader("bookfish.bin") as reader:
         entry=list(reader.find_all(board))
@@ -27,24 +22,63 @@ def findMovePolyglot(board):
         else:       
             return [str(entry[0].move()), entry[0].weight, entry[0].learn]
 
+def findRandomMovePolyglot(board):
+    """
+    Fonction qui renvoie un move aleatoire a jouer parmi la liste des meilleurs move, d'apres Polyglot
+    Paramatres :
+        -board : le board actuel (qui contient le tour a jouer)
+    Retourne :
+        -List[move a jouer, poids du move, learn]
+    """
+    #access the Polyglot book
+    with chess.polyglot.open_reader("bookfish.bin") as reader:
+        entry=list(reader.find_all(board))
+        lenList= len(entry)
+        #S'il n'y a aucun coup a jouer, on return None
+        if(lenList==0):
+            return None
+        #S'il n'a qu'un coup restant d'apres Polyglot, on le joue
+        if(lenList==1):
+            return [str(entry[0].move()), entry[0].weight, entry[0].learn]
+        #S'il y a plus d'un coup jouable, on utilise randrange pour jouer un coup aleatoire parmis les coups,
+        #en excluant le meilleur coup
+        else:       
+            moveToPlay= random.randrange(1, lenList)
+            return [str(entry[moveToPlay].move()), entry[moveToPlay].weight, entry[moveToPlay].learn]
+
 def playMove(currentBoard,moveUci):
     moveToDo=chess.Move.from_uci(moveUci)
     currentBoard.push(moveToDo)
 
 board=chess.Board()
+findRandomMovePolyglot(board)
 tour=1
 print(board)
 
 
-while (findMovePolyglot(board) is not None):
+# ALGORITHME QUI FAIT JOUER L'ALGORITHME POLYGLOT CONTRE LUI-MEME
+#while (findBestMovePolyglot(board) is not None):
+#    print("----------------------")
+#    if(tour%2==0):
+#        print("TOUR NOIR : ", findBestMovePolyglot(board)[1])
+#    else:
+#        print("TOUR BLANC : ", findBestMovePolyglot(board)[1])
+#    playMove(board,findBestMovePolyglot(board)[0])
+#    print(board)
+#    tour+=1
+
+# ALGORITHME QUI FAIT JOUER L'ALGORITHME POLYGLOT CONTRE UN BOT "ALEATOIRE" 
+while (findRandomMovePolyglot(board) is not None):
     print("----------------------")
     if(tour%2==0):
-        print("TOUR NOIR : ", findMovePolyglot(board)[1])
+        print("TOUR NOIR : ", findRandomMovePolyglot(board)[1])
     else:
-        print("TOUR BLANC : ", findMovePolyglot(board)[1])
-    playMove(board,findMovePolyglot(board)[0])
+        print("TOUR BLANC : ", findRandomMovePolyglot(board)[1])
+    playMove(board,findRandomMovePolyglot(board)[0])
     print(board)
     tour+=1
+    
+
 
 # Make the move
 
