@@ -29,6 +29,10 @@ Milestone 3:
 
 Board representation and legal moves are no longer provided by python-chess but are students' responsibilities
 
+## Trello 
+
+URL : https://trello.com/b/Q7NDMMTb/polychess-henaff
+
 ## New techniques/skills/terms to get acquainted with
 
 * Chess (maybe)
@@ -46,3 +50,5 @@ Board representation and legal moves are no longer provided by python-chess but 
 * Transposition table
 * Zobrist key
 * Perft
+
+
