@@ -46,6 +46,20 @@ def findRandomMovePolyglot(board):
             moveToPlay= random.randrange(1, lenList)
             return [str(entry[moveToPlay].move()), entry[moveToPlay].weight, entry[moveToPlay].learn]
 
+def findRandomMove(board):
+    """
+    Fonction qui renvoie un move aleatoire a jouer parmi la liste des moves possibles
+    Paramatres :
+        -board : le board actuel (qui contient le tour a jouer)
+    Retourne :
+        -string : move a jouer
+    """
+    #get all the legal moves for the current position
+    moves = board.legal_moves
+    moveToPlay= random.randrange(0, len(moves))
+    return moves[moveToPlay]
+
+
 def playMove(currentBoard,moveUci):
     moveToDo=chess.Move.from_uci(moveUci)
     currentBoard.push(moveToDo)
@@ -59,7 +73,7 @@ print(board)
 #while (findBestMovePolyglot(board) is not None):
 #    print("----------------------")
 #    if(tour%2==0):
-#        print("TOUR NOIR : ", findBestMovePolyglot(board)[1])
+#        print("TOUR",,"NOIR: ", findBestMovePolyglot(board)[1])
 #    else:
 #        print("TOUR BLANC : ", findBestMovePolyglot(board)[1])
 #    playMove(board,findBestMovePolyglot(board)[0])
@@ -69,18 +83,30 @@ print(board)
 
 
 # ALGORITHME QUI FAIT JOUER L'ALGORITHME POLYGLOT CONTRE UN BOT "ALEATOIRE" 
-while (findRandomMovePolyglot(board) is not None):
-    print("----------------------")
-    if(tour%2==0):
-        randomMove=findRandomMovePolyglot(board)
-        print("TOUR NUMERO",tour,"NOIR : ", randomMove[1])
-        playMove(board,randomMove[0])
-    else:
-        print("TOUR NUMERO",tour,"BLANC : ", findBestMovePolyglot(board)[1])
-        playMove(board,findBestMovePolyglot(board)[0])
-    print(board)
-    tour+=1
+#while (findRandomMovePolyglot(board) is not None):
+#    print("----------------------")
+#    if(tour%2==0):
+#        randomMove=findRandomMovePolyglot(board)
+#        print("TOUR NUMERO",tour,"NOIR : ", randomMove[1])
+#        playMove(board,randomMove[0])
+#    else:
+#        print("TOUR NUMERO",tour,"BLANC : ", findBestMovePolyglot(board)[1])
+#        playMove(board,findBestMovePolyglot(board)[0])
+#    print(board)
+#    tour+=1
     
+# ALGORITHME QUI FAIT JOUER L'ALGORITHME POLYGLOT CONTRE UN BOT "ALEATOIRE" 
+#while (findRandomMovePolyglot(board) is not None):
+#    print("----------------------")
+#    if(tour%2==0):
+#        randomMove=findRandomMovePolyglot(board)
+#        print("TOUR NUMERO",tour,"NOIR : ", randomMove[1])
+#        playMove(board,randomMove[0])
+#    else:
+#        print("TOUR NUMERO",tour,"BLANC : ", findBestMovePolyglot(board)[1])
+#        playMove(board,findBestMovePolyglot(board)[0])
+#    print(board)
+#    tour+=1
 
 
 # Make the move
