@@ -18,7 +18,7 @@ def findBestMovePolyglot(board):
     with chess.polyglot.open_reader("bookfish.bin") as reader:
         entry=list(reader.find_all(board))
         if(entry==[]):
-            return None
+            return [None,None,None]
         else:       
             return [str(entry[0].move()), entry[0].weight, entry[0].learn]
 
@@ -36,7 +36,7 @@ def findRandomMovePolyglot(board):
         lenList= len(entry)
         #S'il n'y a aucun coup a jouer, on return None
         if(lenList==0):
-            return None
+            return [None,None,None]
         #S'il n'a qu'un coup restant d'apres Polyglot, on le joue
         if(lenList==1):
             return [str(entry[0].move()), entry[0].weight, entry[0].learn]
@@ -62,8 +62,8 @@ def findRandomMove(board):
     #return None if the player can't move
     else:
         return None
-    #return a random move in this list of moves
-    return moves[moveToPlay]
+    #return a random move in this list of moves in UCI format
+    return chess.Move.uci(moves[moveToPlay])
 
 
 def getMove(currentBoard,typeJoueur):
@@ -93,6 +93,15 @@ def getMove(currentBoard,typeJoueur):
         pass
     return move
 
+def getCurrentPlayer(currentBoard,typeJoueurW,typeJoueurB):
+    if currentBoard.turn:
+        typeCurrentPlayer=typeJoueurW
+        currentPlayer="W"
+    else:
+        typeCurrentPlayer=typeJoueurB
+        currentPlayer="B"
+    return [typeCurrentPlayer,currentPlayer]
+
 def playMove(currentBoard,move):
     """
     Fonction qui joue un coup en fonction du type du joueur actuel
@@ -105,62 +114,49 @@ def playMove(currentBoard,move):
     moveToDo=chess.Move.from_uci(move)
     currentBoard.push(moveToDo)
 
+def chessGame(currentBoard,typeJoueurW,typeJoueurB):
+    #Trouve le type du joueur actuel 
+    typeCurrentPlayer=typeJoueurW
+    colorCurrentPlayer=getCurrentPlayer(currentBoard,typeJoueurW,typeJoueurB)[1]
+    numeroTour=1
+    print("Début de la partie :")
+    print(currentBoard)
+    #Boucle du jeu
+    while getMove(currentBoard,typeCurrentPlayer) is not None:
+        
+        if(colorCurrentPlayer=="W"):
+            print("-----------------------")
+            print("TOUR",numeroTour)
+            print("Coup BLANC :")
+        else:
+            print("\nCoup NOIR:")
+            numeroTour+=1
+        playMove(currentBoard,getMove(currentBoard,typeCurrentPlayer))       
+        if currentBoard.turn:
+            typeCurrentPlayer=typeJoueurW
+        else:
+            typeCurrentPlayer=typeJoueurB
+        print(currentBoard)
+        typeCurrentPlayer=getCurrentPlayer(currentBoard,typeJoueurW,typeJoueurB)[0]
+        colorCurrentPlayer=getCurrentPlayer(currentBoard,typeJoueurW,typeJoueurB)[1]
+    print("Fin de la partie : aucun Move n'a été trouvé pour le joueur", colorCurrentPlayer)
+            
+    
+    
+
 board=chess.Board()
 board2 = chess.Board('rn1q1rk1/pppbb1pp/4pn2/3p1p2/2PP4/BP3NP1/P3PPBP/RN1Q1RK1 b - - 2 8')
 tour=1
-print(board)
-print(chess.BLACK)
-print(board.turn)
-
-#def chessGame(currentBoard,typeJoueur1,typeJoueur2):
-#    currentPlayerType=
-#    while getMove(currentBoard,typeJoueur1,typeJoueur2) is not None:
-#        if(currentBoard.turn):
-#            print("Coup BLANC :")
+chessGame(board,1,3)
+#-1:Joué par Polyglot (meilleur coup d'après lui)
+#-2:Joué par Polyglot (coup aléatoire parmis les coups qu'il propose)
+#-3:Joué totalement aléatoirement (parmi les coups possibles)
+#-4:Joué par un humain (à travers la console)
+#-5:Joué avec MinMax pour trouver le meilleur coup
             
         
         
     
-
-# ALGORITHME QUI FAIT JOUER L'ALGORITHME POLYGLOT CONTRE LUI-MEME
-#while (findBestMovePolyglot(board) is not None):
-#    print("----------------------")
-#    if(tour%2==0):
-#        print("TOUR",,"NOIR: ", findBestMovePolyglot(board)[1])
-#    else:
-#        print("TOUR BLANC : ", findBestMovePolyglot(board)[1])
-#    playMove(board,findBestMovePolyglot(board)[0])
-#    print(board)
-#    tour+=1
-
-
-
-# ALGORITHME QUI FAIT JOUER L'ALGORITHME POLYGLOT CONTRE UN BOT "ALEATOIRE" QUI UTILISE POLYGLOT
-#while (findRandomMovePolyglot(board) is not None):
-#    print("----------------------")
-#    if(tour%2==0):
-#        randomMove=findRandomMovePolyglot(board)
-#        print("TOUR NUMERO",tour,"NOIR : ", randomMove[1])
-#        playMove(board,randomMove[0])
-#    else:
-#        print("TOUR NUMERO",tour,"BLANC : ", findBestMovePolyglot(board)[1])
-#        playMove(board,findBestMovePolyglot(board)[0])
-#    print(board)
-#    tour+=1
-    
-# ALGORITHME QUI FAIT JOUER L'ALGORITHME POLYGLOT CONTRE UN BOT "ALEATOIRE" COMPLETEMENT
-#while (findRandomMovePolyglot(board) is not None):
-#    print("----------------------")
-#    if(tour%2==0):
-#        randomMove=findRandomMove(board)
-#        print("TOUR NUMERO",tour,"NOIR : ")
-#        playMove(board,randomMove)
-#    else:
-#        print("TOUR NUMERO",tour,"BLANC : ", findBestMovePolyglot(board)[1])
-#        playMove(board,findBestMovePolyglot(board)[0])
-#    print(board)
-#    tour+=1
-
 
 # Make the move
 
