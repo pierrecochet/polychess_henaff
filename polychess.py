@@ -116,6 +116,7 @@ def playMove(currentBoard,move):
     currentBoard.push(moveToDo)
     
 def gameOver(currentBoard,typeCurrentPlayer):
+    print(list(currentBoard.legal_moves))
     #Si le joueur actuel se sert uniquement de Polyglot, on provoque le GameOver 
     #lorsque Polyglot ne propose plus aucun coup à jouer
     if(typeCurrentPlayer == 1 or typeCurrentPlayer == 2):
@@ -127,8 +128,12 @@ def gameOver(currentBoard,typeCurrentPlayer):
             return [True, "Le joueur est en pat"]
         if(currentBoard.is_insufficient_material()):
             return [True, "Matériel insuffisant"]
-        if(currentBoard.is_game_over()):
+        if(currentBoard.is_checkmate()):
             return [True, "Echec et mat"]
+        if(currentBoard.is_seventyfive_moves()):
+            return [True, "75 tours sont passés sans capture ni mouvement de pion"]
+        if(currentBoard.is_fivefold_repetition()):
+            return [True, "La même position est apparue 5 fois de suite"]
     return [False,""]
 
 def chessGame(currentBoard,typeJoueurW,typeJoueurB):
