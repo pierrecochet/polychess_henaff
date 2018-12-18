@@ -167,9 +167,10 @@ def chessGame(currentBoard,typeJoueurW,typeJoueurB):
     
 
 board=chess.Board()
-board2 = chess.Board('rn1q1rk1/pppbb1pp/4pn2/3p1p2/2PP4/BP3NP1/P3PPBP/RN1Q1RK1 b - - 2 8')
+board2 = chess.Board("rn1q1rk1/pppbb1pp/4pn2/3p1p2/2PP4/BP3NP1/P3PPBP/RN1Q1RK1 b - - 2 8")
+print(board)
 tour=1
-chessGame(board,3,3)
+#chessGame(board,3,3)
 #-1:Joué par Polyglot (meilleur coup d'après lui)
 #-2:Joué par Polyglot (coup aléatoire parmis les coups qu'il propose)
 #-3:Joué totalement aléatoirement (parmi les coups possibles)
