@@ -57,14 +57,18 @@ def findRandomMove(board):
     #get all the legal moves for the current position
     moves = list(board.legal_moves)
     #get a random int between 0 and the number of legal moves
-    moveToPlay= random.randrange(0, len(moves))
+    if len(moves)>0:
+        moveToPlay= random.randrange(0, len(moves))
+    #return None if the player can't move
+    else:
+        return None
     #return a random move in this list of moves
     return moves[moveToPlay]
 
 
-def playMove(currentBoard,typeJoueur):
+def getMove(currentBoard,typeJoueur):
     """
-    Fonction qui joue un coup en fonction du type du joueur actuel
+    Fonction qui retourne un coup en fonction du type du joueur actuel
     Paramatres :
         -board : le board actuel (qui contient le tour a jouer)
         -typeJoueur(int): le type du joueur actuel
@@ -74,7 +78,8 @@ def playMove(currentBoard,typeJoueur):
             -4:Joué par un humain (à travers la console)
             -5:Joué avec MinMax pour trouver le meilleur coup
     Retourne :
-        Aucun retour, le coup est simplement joué
+        -move(str):le move a jouer en format FEN
+            Ce move peut valoir None si aucun coup n'a été trouvé
     """
     if typeJoueur==1:
         move=findBestMovePolyglot(currentBoard)[0]
@@ -86,16 +91,36 @@ def playMove(currentBoard,typeJoueur):
         pass
     if typeJoueur==5:
         pass
+    return move
+
+def playMove(currentBoard,move):
+    """
+    Fonction qui joue un coup en fonction du type du joueur actuel
+    Paramatres :
+        -board : le board actuel (qui contient le tour a jouer)
+        -move: le move a jouer en format FEN
+    Retourne :
+        Aucun retour, le coup est simplement joué
+    """
     moveToDo=chess.Move.from_uci(move)
     currentBoard.push(moveToDo)
 
 board=chess.Board()
+board2 = chess.Board('rn1q1rk1/pppbb1pp/4pn2/3p1p2/2PP4/BP3NP1/P3PPBP/RN1Q1RK1 b - - 2 8')
 tour=1
 print(board)
-print(board.legal_moves.count())
-print(findRandomMove(board))
+print(chess.BLACK)
+print(board.turn)
 
-
+#def chessGame(currentBoard,typeJoueur1,typeJoueur2):
+#    currentPlayerType=
+#    while getMove(currentBoard,typeJoueur1,typeJoueur2) is not None:
+#        if(currentBoard.turn):
+#            print("Coup BLANC :")
+            
+        
+        
+    
 
 # ALGORITHME QUI FAIT JOUER L'ALGORITHME POLYGLOT CONTRE LUI-MEME
 #while (findBestMovePolyglot(board) is not None):
