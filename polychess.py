@@ -55,18 +55,31 @@ def findRandomMove(board):
         -string : move a jouer
     """
     #get all the legal moves for the current position
-    moves = board.legal_moves
-    moveToPlay= random.randrange(0, moves.count())
-    #return 
+    moves = list(board.legal_moves)
+    #get a random int between 0 and the number of legal moves
+    moveToPlay= random.randrange(0, len(moves))
+    #return a random move in this list of moves
+    return moves[moveToPlay]
 
 
-def playMove(currentBoard,moveUci):
+def playMove(currentBoard,typeJoueur):
+    """
+    Fonction qui joue un coup en fonction du type du joueur actuel
+    Paramatres :
+        -board : le board actuel (qui contient le tour a jouer)
+        -typeJoueur(int): le type du joueur actuel
+            -1:Joué par Polyglot (meilleur coup d'après lui)
+    Retourne :
+        -string : move a jouer
+    """
     moveToDo=chess.Move.from_uci(moveUci)
     currentBoard.push(moveToDo)
 
 board=chess.Board()
 tour=1
 print(board)
+print(board.legal_moves.count())
+print(findRandomMove(board))
 
 
 # ALGORITHME QUI FAIT JOUER L'ALGORITHME POLYGLOT CONTRE LUI-MEME
@@ -96,17 +109,17 @@ print(board)
 #    tour+=1
     
 # ALGORITHME QUI FAIT JOUER L'ALGORITHME POLYGLOT CONTRE UN BOT "ALEATOIRE" COMPLETEMENT
-while (findRandomMovePolyglot(board) is not None):
-    print("----------------------")
-    if(tour%2==0):
-        randomMove=findRandomMove(board)
-        print("TOUR NUMERO",tour,"NOIR : ")
-        playMove(board,randomMove)
-    else:
-        print("TOUR NUMERO",tour,"BLANC : ", findBestMovePolyglot(board)[1])
-        playMove(board,findBestMovePolyglot(board)[0])
-    print(board)
-    tour+=1
+#while (findRandomMovePolyglot(board) is not None):
+#    print("----------------------")
+#    if(tour%2==0):
+#        randomMove=findRandomMove(board)
+#        print("TOUR NUMERO",tour,"NOIR : ")
+#        playMove(board,randomMove)
+#    else:
+#        print("TOUR NUMERO",tour,"BLANC : ", findBestMovePolyglot(board)[1])
+#        playMove(board,findBestMovePolyglot(board)[0])
+#    print(board)
+#    tour+=1
 
 
 # Make the move
