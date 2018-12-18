@@ -77,6 +77,7 @@ def getMove(currentBoard,typeJoueur):
             -3:Joué totalement aléatoirement (parmi les coups possibles)
             -4:Joué par un humain (à travers la console)
             -5:Joué avec MinMax pour trouver le meilleur coup
+            -6:Joué avec Polyglot puis MinMax lorsque Polyglot ne trouve plus rien
     Retourne :
         -move(str):le move a jouer en format FEN
             Ce move peut valoir None si aucun coup n'a été trouvé
@@ -113,6 +114,22 @@ def playMove(currentBoard,move):
     """
     moveToDo=chess.Move.from_uci(move)
     currentBoard.push(moveToDo)
+    
+def gameOver(currentBoard,typeCurrentPlayer):
+    #Si le joueur actuel se sert uniquement de Polyglot, on provoque le GameOver 
+    #lorsque Polyglot ne propose plus aucun coup à jouer
+    if(typeCurrentPlayer == 1 or typeCurrentPlayer == 2):
+        if (getMove(currentBoard,typeCurrentPlayer) is None):
+            return [True, "Aucun move n'a été trouvé dans Polyglot"]
+    #Si le joueur actuel ne se sert pas d'uniquement Polyglot (Aléatoire, humain...)
+    else:
+        if(currentBoard.is_stalemate()):
+            return [True, "Le joueur est en pat"]
+        if(currentBoard.is_insufficient_material()):
+            return [True, "Matériel insuffisant"]
+        if(currentBoard.is_game_over()):
+            return [True, "Echec et mat"]
+    return [False,""]
 
 def chessGame(currentBoard,typeJoueurW,typeJoueurB):
     #Trouve le type du joueur actuel 
@@ -122,7 +139,7 @@ def chessGame(currentBoard,typeJoueurW,typeJoueurB):
     print("Début de la partie :")
     print(currentBoard)
     #Boucle du jeu
-    while getMove(currentBoard,typeCurrentPlayer) is not None:
+    while gameOver(currentBoard,typeCurrentPlayer)[0] == False:
         
         if(colorCurrentPlayer=="W"):
             print("-----------------------")
@@ -139,7 +156,7 @@ def chessGame(currentBoard,typeJoueurW,typeJoueurB):
         print(currentBoard)
         typeCurrentPlayer=getCurrentPlayer(currentBoard,typeJoueurW,typeJoueurB)[0]
         colorCurrentPlayer=getCurrentPlayer(currentBoard,typeJoueurW,typeJoueurB)[1]
-    print("Fin de la partie : aucun Move n'a été trouvé pour le joueur", colorCurrentPlayer)
+    print("Fin de la partie : ",gameOver(currentBoard,typeCurrentPlayer)[1])
             
     
     
@@ -147,7 +164,7 @@ def chessGame(currentBoard,typeJoueurW,typeJoueurB):
 board=chess.Board()
 board2 = chess.Board('rn1q1rk1/pppbb1pp/4pn2/3p1p2/2PP4/BP3NP1/P3PPBP/RN1Q1RK1 b - - 2 8')
 tour=1
-chessGame(board,1,3)
+chessGame(board,3,3)
 #-1:Joué par Polyglot (meilleur coup d'après lui)
 #-2:Joué par Polyglot (coup aléatoire parmis les coups qu'il propose)
 #-3:Joué totalement aléatoirement (parmi les coups possibles)
