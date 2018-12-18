@@ -28,3 +28,6 @@ board.push(chess.Move.from_uci(chess.Move.uci(list(board.legal_moves)[0])))
 board
 board.pop()
 board
+runfile('E:/Cours/ProjChess/polychess_henaff/minMax.py', wdir='E:/Cours/ProjChess/polychess_henaff')
+%clear
+runfile('E:/Cours/ProjChess/polychess_henaff/minMax.py', wdir='E:/Cours/ProjChess/polychess_henaff')
