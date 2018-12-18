@@ -69,10 +69,24 @@ def playMove(currentBoard,typeJoueur):
         -board : le board actuel (qui contient le tour a jouer)
         -typeJoueur(int): le type du joueur actuel
             -1:Joué par Polyglot (meilleur coup d'après lui)
+            -2:Joué par Polyglot (coup aléatoire parmis les coups qu'il propose)
+            -3:Joué totalement aléatoirement (parmi les coups possibles)
+            -4:Joué par un humain (à travers la console)
+            -5:Joué avec MinMax pour trouver le meilleur coup
     Retourne :
-        -string : move a jouer
+        Aucun retour, le coup est simplement joué
     """
-    moveToDo=chess.Move.from_uci(moveUci)
+    if typeJoueur==1:
+        move=findBestMovePolyglot(currentBoard)[0]
+    if typeJoueur==2:
+        move=findRandomMovePolyglot(currentBoard)[0]
+    if typeJoueur==3:
+        move=findRandomMove(currentBoard)
+    if typeJoueur==4:
+        pass
+    if typeJoueur==5:
+        pass
+    moveToDo=chess.Move.from_uci(move)
     currentBoard.push(moveToDo)
 
 board=chess.Board()
@@ -80,6 +94,7 @@ tour=1
 print(board)
 print(board.legal_moves.count())
 print(findRandomMove(board))
+
 
 
 # ALGORITHME QUI FAIT JOUER L'ALGORITHME POLYGLOT CONTRE LUI-MEME
