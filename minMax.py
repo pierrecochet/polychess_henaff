@@ -1,7 +1,7 @@
 import chess
 #used to access Polyglot book
 import chess.polyglot
-import evaluation
+import evaluation as ev
 
 
 def boardValue(board):
@@ -61,6 +61,10 @@ def getBestNextMove(currentBoard):
         return [bestMove, maxWhite]
     else:
         return [bestMove, minBlack]
+    
+    
+
+#def getFullValueMove()
         
 
         
@@ -79,7 +83,7 @@ def minMax(board, depth):
     moves = list(board.legal_moves)
     
     if depth == 0 or moves == 0:
-        return (boardValue(board), None)
+        return (ev.getBoardEval(board), None)
     
     if board.turn :
         maxValue = -float("inf")
@@ -110,6 +114,8 @@ board1 = chess.Board("rnbqkbnr/pppppppp/8/8/8/8/PPPPPPPP/RNBQKBNR w KQkq - 0 1")
 board2 = chess.Board('rn1q1rk1/pppbb1pp/4pn2/3p1p2/2PP4/BP3NP1/P3PPBP/RN1Q1RK1 b - - 2 8')
 
 
-print(minMax(board1,1))
+#print(ev.getBoardEval(board2))
+
+print(minMax(board2,3))
 #print(minMax(board, 0))
 

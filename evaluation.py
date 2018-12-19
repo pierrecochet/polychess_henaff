@@ -95,21 +95,21 @@ def getValueCell(cell,i,j):
     if "P" in cell:
         valueCell+=10+pointsPawn[i][j]
     if "r" in cell:
-        valueCell+=(-1)*(50+pointsRook[i][j])
+        valueCell+=(-1)*(51+pointsRook[i][j])
     if "R" in cell:
-        valueCell+=50+pointsRook[i][j]
+        valueCell+=51+pointsRook[i][j]
     if "n" in cell:
-        valueCell+=(-1)*(30+pointsKnight[i][j])
+        valueCell+=(-1)*(32+pointsKnight[i][j])
     if "N" in cell:
-        valueCell+=30+pointsKnight[i][j]
+        valueCell+=32+pointsKnight[i][j]
     if "b" in cell:
-        valueCell+=(-1)*(30+pointsBishop[i][j])
+        valueCell+=(-1)*(33.3+pointsBishop[i][j])
     if "B" in cell:
-        valueCell+=30+pointsBishop[i][j]
+        valueCell+=33.3+pointsBishop[i][j]
     if "q" in cell:
-        valueCell+=(-1)*(90+pointsQueen[i][j])
+        valueCell+=(-1)*(88+pointsQueen[i][j])
     if "Q" in cell:
-        valueCell+=90+pointsQueen[i][j]
+        valueCell+=88+pointsQueen[i][j]
     if "k" in cell:
         valueCell+=(-1)*(900+pointsKing[i][j])
     if "K" in cell:
@@ -117,7 +117,7 @@ def getValueCell(cell,i,j):
     return valueCell
 
 def getBoardEval(board):
-    arrayBoard=boardToArray(board)
+    arrayBoard=boardToArray(board.fen())
     reversedBlack=returnBlackPlayer(arrayBoard)
     valueEval=0
     for i,line in enumerate(reversedBlack):
