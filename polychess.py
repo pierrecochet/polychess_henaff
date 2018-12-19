@@ -66,6 +66,8 @@ def findRandomMove(board):
     #return a random move in this list of moves in UCI format
     return chess.Move.uci(moves[moveToPlay])
 
+def findMovePGthenMinMax(currentBoard):
+    pass
 
 def getMove(currentBoard,typeJoueur):
     """
@@ -92,7 +94,9 @@ def getMove(currentBoard,typeJoueur):
     if typeJoueur==4:
         pass
     if typeJoueur==5:
-        move=chess.Move.uci(minMax.minMaxAlphaBeta(currentBoard,1,-3000,3000)[1])
+        move=chess.Move.uci(minMax.minMaxAlphaBeta(currentBoard,4,-3000,3000)[1])
+    if typeJoueur==6:
+        move=findMovePGthenMinMax(currentBoard)
     return move
 
 def getCurrentPlayer(currentBoard,typeJoueurW,typeJoueurB):
@@ -171,7 +175,7 @@ board=chess.Board()
 board2 =chess.Board("rn1q1rk1/pppbb1pp/4pn2/3p1p2/2PP4/BP3NP1/P3PPBP/RN1Q1RK1 b - - 2 8")
 #print(board)
 #tour=1
-chessGame(board,5,5)
+chessGame(board,5,3)
 #-1:Joué par Polyglot (meilleur coup d'après lui)
 #-2:Joué par Polyglot (coup aléatoire parmis les coups qu'il propose)
 #-3:Joué totalement aléatoirement (parmi les coups possibles)
