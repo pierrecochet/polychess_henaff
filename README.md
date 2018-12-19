@@ -33,6 +33,16 @@ Board representation and legal moves are no longer provided by python-chess but 
 
 URL : https://trello.com/b/Q7NDMMTb/polychess-henaff
 
+## Our Team 
+
+Team leader : Evan Dadure
+Team Members : Evan Dadure, Maxence Personnaz, Pierre Cochet, Thomas Cormier
+
+## Run it!
+
+Download the programm, and open polychess.py with a python compiler. python
+Then compile and execut polychess.py.
+
 ## New techniques/skills/terms to get acquainted with
 
 * Chess (maybe)
