@@ -109,9 +109,57 @@ def minMax(board, depth):
                 minValue = val
                 bestMove = move
         return (minValue, bestMove)
-        
-#
 
+def minMaxAlphaBeta(board, depth, alpha, beta):
+    """
+    Fonction qui calcule le meilleur coup à jouer en simulant les 
+    prochain n coups
+    Paramatres :
+        -board : le board actuel (qui contient le tour a jouer)
+        -depth : nombre de tour simulés
+    Retourne :
+        Tuples : Valeur de mouvement + mouvement à jouer
+    """
+    moves = list(board.legal_moves)
+    if depth == 0 or moves == 0:
+        return (ev.getBoardEval(board), None)
+    
+    
+    if board.turn :
+        bestMove = None
+        maxValue = -3000
+        for move in moves :
+            nextMove = chess.Move.from_uci(chess.Move.uci(move))
+            board.push(nextMove)
+            val, currentMove = minMaxAlphaBeta(board, depth-1, alpha, beta)
+            board.pop()
+            if val > maxValue:
+                maxValue = val
+                bestMove = move
+            alpha=max(alpha,val)
+            if beta <= alpha:
+                break
+        return (maxValue, bestMove)
+    else :
+        minValue = 3000
+        bestMove = None
+        for move in moves :
+            nextMove = chess.Move.from_uci(chess.Move.uci(move))
+            board.push(nextMove)
+            val, currentMove = minMaxAlphaBeta(board, depth-1, alpha, beta)
+            board.pop()
+            if val < minValue:
+                minValue = val
+                bestMove = move
+            beta=min(beta,val)
+            if beta <= alpha:
+                break
+        return (minValue, bestMove)        
+    
+    
+#board2 =chess.Board("rn1q1rk1/pppbb1pp/4pn2/3p1p2/2PP4/BP3NP1/P3PPBP/RN1Q1RK1 b - - 2 8")
+#print(minMaxv2(board2,4,-3000,3000))
+#print(minMax(board2,3))
 
 
 #print(ev.getBoardEval(board2))

@@ -77,7 +77,7 @@ def getMove(currentBoard,typeJoueur):
             -2:Joué par Polyglot (coup aléatoire parmis les coups qu'il propose)
             -3:Joué totalement aléatoirement (parmi les coups possibles)
             -4:Joué par un humain (à travers la console)
-            -5:Joué avec MinMax pour trouver le meilleur coup
+            -5:Joué avec MinMax (et amélioré par AlphaBeta) pour trouver le meilleur coup
             -6:Joué avec Polyglot puis MinMax lorsque Polyglot ne trouve plus rien
     Retourne :
         -move(str):le move a jouer en format FEN
@@ -92,7 +92,7 @@ def getMove(currentBoard,typeJoueur):
     if typeJoueur==4:
         pass
     if typeJoueur==5:
-        move=chess.Move.uci(minMax.minMax(currentBoard,3)[1])
+        move=chess.Move.uci(minMax.minMaxAlphaBeta(currentBoard,1,-3000,3000)[1])
     return move
 
 def getCurrentPlayer(currentBoard,typeJoueurW,typeJoueurB):
