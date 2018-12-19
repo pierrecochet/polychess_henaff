@@ -81,22 +81,21 @@ def minMax(board, depth):
         Tuples : Valeur de mouvement + mouvement à jouer
     """
     moves = list(board.legal_moves)
-    
     if depth == 0 or moves == 0:
         return (ev.getBoardEval(board), None)
     
+    
     if board.turn :
-        maxValue = -3000
         bestMove = None
+        maxValue = -3000
         for move in moves :
             nextMove = chess.Move.from_uci(chess.Move.uci(move))
             board.push(nextMove)
-            val, bestMove = minMax(board, depth-1)
+            val, currentMove = minMax(board, depth-1)
             board.pop()
             if val > maxValue:
                 maxValue = val
                 bestMove = move
-                print(bestMove)
         return (maxValue, bestMove)
     else :
         minValue = 3000
@@ -104,7 +103,7 @@ def minMax(board, depth):
         for move in moves :
             nextMove = chess.Move.from_uci(chess.Move.uci(move))
             board.push(nextMove)
-            val, bestMove = minMax(board, depth-1)
+            val, currentMove = minMax(board, depth-1)
             board.pop()
             if val < minValue:
                 minValue = val
@@ -119,6 +118,11 @@ board2 = chess.Board('rn1q1rk1/pppbb1pp/4pn2/3p1p2/2PP4/BP3NP1/P3PPBP/RN1Q1RK1 b
 #print(ev.getBoardEval(board2))
 
 print(minMax(board2,3))
->>>>>>> aa48b2139e131e022c3a20b4b50c9ae7cab953e2
+#print(list(board2.legal_moves))
+#for move in list(board2.legal_moves):
+#    nextMove = chess.Move.from_uci(chess.Move.uci(move))
+#    board2.push(nextMove)   
+#    print(getBestNextMove(board2))
+#    board2.pop()
 #print(minMax(board, 0))
 

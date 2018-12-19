@@ -44,3 +44,22 @@ minMax(board2, 1)
 minMax(board2, 3)
 minMax(board2, 1)
 minMax(board2, 2)
+runfile('E:/Cours/ProjChess/polychess_henaff/minMax.py', wdir='E:/Cours/ProjChess/polychess_henaff')
+%clear
+runfile('E:/Cours/ProjChess/polychess_henaff/minMax.py', wdir='E:/Cours/ProjChess/polychess_henaff')
+board
+runfile('E:/Cours/ProjChess/polychess_henaff/minMax.py', wdir='E:/Cours/ProjChess/polychess_henaff')
+debugfile('E:/Cours/ProjChess/polychess_henaff/minMax.py', wdir='E:/Cours/ProjChess/polychess_henaff')
+runfile('E:/Cours/ProjChess/polychess_henaff/minMax.py', wdir='E:/Cours/ProjChess/polychess_henaff')
+board2.legal_moves
+board2.legal_moves()
+print(board2.legal_moves())
+list(board.legal_moves)
+list(board2.legal_moves)
+runfile('E:/Cours/ProjChess/polychess_henaff/minMax.py', wdir='E:/Cours/ProjChess/polychess_henaff')
+board2
+runfile('E:/Cours/ProjChess/polychess_henaff/minMax.py', wdir='E:/Cours/ProjChess/polychess_henaff')
+board2
+runfile('E:/Cours/ProjChess/polychess_henaff/minMax.py', wdir='E:/Cours/ProjChess/polychess_henaff')
+board1
+runfile('E:/Cours/ProjChess/polychess_henaff/minMax.py', wdir='E:/Cours/ProjChess/polychess_henaff')
