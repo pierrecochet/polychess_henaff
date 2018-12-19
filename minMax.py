@@ -110,14 +110,13 @@ def minMax(board, depth):
                 bestMove = move
         return (minValue, bestMove)
         
-board1 = chess.Board("rnbqkbnr/pppppppp/8/8/8/8/PPPPPPPP/RNBQKBNR w KQkq - 0 1")
-board2 = chess.Board('rn1q1rk1/pppbb1pp/4pn2/3p1p2/2PP4/BP3NP1/P3PPBP/RN1Q1RK1 b - - 2 8')
+#
 
 
 
 #print(ev.getBoardEval(board2))
 
-print(minMax(board2,3))
+#print(minMax(board2,3))
 #print(list(board2.legal_moves))
 #for move in list(board2.legal_moves):
 #    nextMove = chess.Move.from_uci(chess.Move.uci(move))
