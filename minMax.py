@@ -68,7 +68,7 @@ def getBestNextMove(currentBoard):
 
 def minMax(board, depth):
     """
-    Fonction qui calcule le meilleur coup à jouer en similant les 
+    Fonction qui calcule le meilleur coup à jouer en simulant les 
     prochain n coups
     Paramatres :
         -board : le board actuel (qui contient le tour a jouer)
@@ -82,7 +82,7 @@ def minMax(board, depth):
         return (boardValue(board), None)
     
     if board.turn :
-        maxValue = -float("inf")
+        maxValue = -3000
         bestMove = None
         for move in moves :
             nextMove = chess.Move.from_uci(chess.Move.uci(move))
@@ -92,9 +92,10 @@ def minMax(board, depth):
             if val > maxValue:
                 maxValue = val
                 bestMove = move
+                print(bestMove)
         return (maxValue, bestMove)
     else :
-        minValue = float("inf")
+        minValue = 3000
         bestMove = None
         for move in moves :
             nextMove = chess.Move.from_uci(chess.Move.uci(move))
@@ -110,6 +111,6 @@ board1 = chess.Board("rnbqkbnr/pppppppp/8/8/8/8/PPPPPPPP/RNBQKBNR w KQkq - 0 1")
 board2 = chess.Board('rn1q1rk1/pppbb1pp/4pn2/3p1p2/2PP4/BP3NP1/P3PPBP/RN1Q1RK1 b - - 2 8')
 
 
-print(minMax(board1,1))
+print(minMax(board2,1))
 #print(minMax(board, 0))
 
