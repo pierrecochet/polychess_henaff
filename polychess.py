@@ -5,6 +5,7 @@ import chess
 import chess.polyglot
 import random
 import minMax
+import evaluation as ev
 
 
 def findBestMovePolyglot(board):
@@ -64,10 +65,31 @@ def findRandomMove(board):
     else:
         return None
     #return a random move in this list of moves in UCI format
+
     return chess.Move.uci(moves[moveToPlay])
 
 def findMovePGthenMinMax(currentBoard):
-    pass
+    move=findBestMovePolyglot(currentBoard)[0]
+    if move is None:
+        move=chess.Move.uci(minMax.minMaxAlphaBeta(currentBoard,4,-3000,3000)[1])
+    return move
+
+def moveFromInput(currentBoard):
+    validMove=False
+    nbTry = 0
+    while validMove == False:
+        if nbTry > 0:
+            print("This isn't a valid move.")
+        currentMove = input("Please enter the move you want to play. (ex : d2d4, a5a7...)")
+        for move in list(currentBoard.legal_moves):
+            if currentMove == chess.Move.uci(move):
+                validMove = True
+        nbTry+=1
+    return currentMove
+        
+
+
+
 
 def getMove(currentBoard,typeJoueur):
     """
@@ -92,7 +114,7 @@ def getMove(currentBoard,typeJoueur):
     if typeJoueur==3:
         move=findRandomMove(currentBoard)
     if typeJoueur==4:
-        pass
+        move=moveFromInput(currentBoard)
     if typeJoueur==5:
         move=chess.Move.uci(minMax.minMaxAlphaBeta(currentBoard,4,-3000,3000)[1])
     if typeJoueur==6:
@@ -121,13 +143,12 @@ def playMove(currentBoard,move):
     currentBoard.push(moveToDo)
     
 def gameOver(currentBoard,typeCurrentPlayer):
-    #print(list(currentBoard.legal_moves))
     #Si le joueur actuel se sert uniquement de Polyglot, on provoque le GameOver 
-    #lorsque Polyglot ne propose plus aucun coup à jouer
+        #lorsque Polyglot ne propose plus aucun coup à jouer
     if(typeCurrentPlayer == 1 or typeCurrentPlayer == 2):
         if (getMove(currentBoard,typeCurrentPlayer) is None):
-            return [True, "Aucun move n'a été trouvé dans Polyglot"]
-    #Si le joueur actuel ne se sert pas d'uniquement Polyglot (Aléatoire, humain...)
+            return [True, "Aucun move n'est possible pour le joueur en cours"]
+    #Si le joueur actuel ne se sert pas d'uniquement Polyglot (Aléatoire, minmax, humain...)
     else:
         if(currentBoard.is_stalemate()):
             return [True, "Le joueur est en pat"]
@@ -173,14 +194,16 @@ def chessGame(currentBoard,typeJoueurW,typeJoueurB):
 
 board=chess.Board()
 board2 =chess.Board("rn1q1rk1/pppbb1pp/4pn2/3p1p2/2PP4/BP3NP1/P3PPBP/RN1Q1RK1 b - - 2 8")
-#print(board)
-#tour=1
-chessGame(board,5,3)
+
+
+#print(chess.Move.from_uci("d2d4"))
+chessGame(board, 4,6)
 #-1:Joué par Polyglot (meilleur coup d'après lui)
 #-2:Joué par Polyglot (coup aléatoire parmis les coups qu'il propose)
 #-3:Joué totalement aléatoirement (parmi les coups possibles)
 #-4:Joué par un humain (à travers la console)
 #-5:Joué avec MinMax pour trouver le meilleur coup
+#-6:Joué avec Polyglot puis MinMax lorsque Polyglot ne trouve plus rien
             
         
         
