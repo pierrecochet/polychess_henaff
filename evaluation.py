@@ -60,46 +60,73 @@ valuesPawn=[[0.0,  0.0,  0.0,  0.0,  0.0,  0.0,  0.0,  0.0],
 
 def boardToArray(board): 
     """
-    Function that plays a chess game until the game is over
+    Function that converts a board (in FEN notation) in a list of lists of lines of the chess board
     Parameters :
-        -currentBoard : the current board
-        -playerTypeW : the type of the white player
-        -playerTypeB : the type of the black player
+        -board : the current board
     Returns :
-        This function doesn't return anything.
+        -arrayBoard : a list composed of lists(=lines) of the strings(=pieces)  of the boards
     """
-    #remplacement des nombres dans la chaine par un nombre de tirets équivalent
+    #replacement of the number in the string by the equivalent number of dashes
     board = board.replace("1","-").replace("2","--").replace("3","---").replace("4","----")\
         .replace("5","-----").replace("6","------").replace("7","-------").replace("8","--------")
     currentLine=[]
-    arrayBoard=[]
+    listBoard=[]
+    #reads the board string char by char in a 'for' loop
     for i,char in enumerate(board):
-        #au premier espace rencontré, on arrête le parcours de la chaine et on rentre dans une nouvelle case la dernière ligne parcourue
+        #When a space char ' ' is read, the loop is stopped and the last read line is
+            #added to the list of lines
         if(char==' '):
-            arrayBoard.append(currentLine)
+            listBoard.append(currentLine)
             break
-        #si on rencontre un slash "/", on créé une nouvelle case dans la liste qui contient la nouvelle ligne parcourue
+        #When a slash '/' is read (= every multiple of 9 char), a new list is created, which will contain the 
+            #next line to add and the last read line is added to the list of lines
         if((i+1)%9==0):
-            arrayBoard.append(currentLine)
+            listBoard.append(currentLine)
             currentLine=[]
-        #ajout du caractère parcouru dans la ligne en cours
+        #Adds the current char in the current list of char (= the current line)
         else:
             currentLine.append(char)
-    return(arrayBoard)
+    return(listBoard)
 
-def returnBlackPlayer(arrayBoard):
-    for i,line in enumerate(arrayBoard):
+def flipBlackPieces(listBoard):
+    """
+    Function that "flips" the positions of the black pieces to put them in their 
+        corresponding place in the white player's side. This is necessary because the
+        lists of values for each piece (in the beginning of this module) are only valid
+        from the white player point of view (they are not symmetrical).
+    Parameters :
+        -listBoard : the current board (as a list of lists of strings)
+    Returns :
+        -listBoard : the current board but with the black positions flipped to be in their white correspondance
+    """
+    for i,line in enumerate(listBoard):
         for j,char in enumerate(line):
-            #S'il n'y a qu'un caractère dans la case, on la traite (ainsi, on ne traitera pas les cases où
-            #un changement de position d'une pièce noire a déjà été fait)
+            #if there is only one char in the cell, we can "work" on it. Thus we don't work with the cells
+                #where a black piece transposition has already been done.
             if(len(char)==1):
-                #Si ce caractère est une majuscule
+                #if the char is a lower case, it's a black piece
                 if(char.islower()):
-                    arrayBoard[7-i][7-j]=arrayBoard[7-i][7-j].replace("-","_")+char
-                    arrayBoard[i][j]='-'
-    return arrayBoard
+                    #The black piece is added to it's new position, and if there's a dash, it's
+                        #replaced with an underscore 
+                    listBoard[7-i][7-j]=listBoard[7-i][7-j].replace("-","_")+char
+                    #The original cell of the black piece is filled by a single dash '-'
+                    listBoard[i][j]='-'
+    return listBoard
 
 def getValueCell(cell,i,j):
+    """
+    Function that returns the value of the cell passed in parameter
+    Parameters :
+        -cell : the string contained in the cell
+        -i : the position i of this cell
+        -j : the position j of this cell
+    Returns :
+        -valueCell : the value of this cell, depending on the piece on it (if there is),
+            the position of the cell, and the color of the piece (the value will be positive if
+            it's a white piece, negative if it's a black piece)
+            The values of each piece (10, 51, 32...) has been found on Internet
+    """
+    
     valueCell=0
     if "p" in cell:
         valueCell+=(-1)*(10+valuesPawn[i][j])
@@ -128,8 +155,17 @@ def getValueCell(cell,i,j):
     return valueCell
 
 def getBoardEval(board):
-    arrayBoard=boardToArray(board.fen())
-    reversedBlack=returnBlackPlayer(arrayBoard)
+    """
+    Function that returns the total value of the board, by summing the value of each cell
+    Parameters :
+        -board : the current board, as a FEN string
+    Returns :
+        - the value of the current board, which is a float
+            if it's positive, the white player's pieces have more value than the black ones
+            if it's negative, the black player's pieces have more value than the white ones
+    """
+    listBoard=boardToArray(board.fen())
+    reversedBlack=flipBlackPieces(listBoard)
     valueEval=0
     for i,line in enumerate(reversedBlack):
         for j,char in enumerate(line):

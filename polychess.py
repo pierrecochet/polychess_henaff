@@ -1,16 +1,18 @@
-#python-chess import
-#https://github.com/niklasf/python-chess
+# =============================================================================
+# IMPORTS 
+# =============================================================================
 import chess
-#used to access Polyglot book
 import chess.polyglot
 import chess.pgn
 import random
 import minMax
-import evaluation as ev
 import os
 import errno
 import datetime
 
+# =============================================================================
+# GENERAL FUNCTIONS 
+# =============================================================================
 
 def findBestMovePolyglot(board):
     """
@@ -237,7 +239,8 @@ def chessGame(currentBoard, playerTypeW,playerTypeB ):
         colorCurrentPlayer=getCurrentPlayer(currentBoard,playerTypeW,playerTypeB)[1]
         
     #Prints GAME OVER when the game is over, and a message to explain why the game is over, depending on the game 
-    print("GAME OVER : ",gameOver(currentBoard,typeCurrentPlayer)[1])
+    print("-----------------------")
+    print("GAME OVER :",gameOver(currentBoard,typeCurrentPlayer)[1])
             
     
 # =============================================================================
@@ -257,7 +260,7 @@ def createPGN(board, eventName=None, siteName=None, datePGN=None, roundNum=None,
         -whiteName : Name of the white player
         -blackName : Name of the black player
     Returns :
-        -Nothing but the new file created in the games directory
+        -Nothing but creates a new file in the games directory
     """
     game = chess.pgn.Game.from_board(board)
     nowPGN = datetime.datetime.now().strftime('%Y.%m.%d')
@@ -283,13 +286,16 @@ def createPGN(board, eventName=None, siteName=None, datePGN=None, roundNum=None,
     f.close()
     
     
+
+
+# =============================================================================
+# TESTING OUR CODE
+# =============================================================================
 board=chess.Board()
 board2 =chess.Board("rn1q1rk1/pppbb1pp/4pn2/3p1p2/2PP4/BP3NP1/P3PPBP/RN1Q1RK1 b - - 2 8")
 
-#print(chess.Move.from_uci("d2d4"))
-
-chessGame(board, 3,3)
-createPGN(board, eventName = "Coupe Du Monde", roundNum = "3")
+chessGame(board, 5,6)
+#createPGN(board, eventName = "Coupe Du Monde", roundNum = "3")
 
 #-1:Joué par Polyglot (meilleur coup d'après lui)
 #-2:Joué par Polyglot (coup aléatoire parmis les coups qu'il propose)
@@ -299,38 +305,3 @@ createPGN(board, eventName = "Coupe Du Monde", roundNum = "3")
 #-6:Joué avec Polyglot puis MinMax lorsque Polyglot ne trouve plus rien
             
 
-#def addMoveToPGN():
-
-
-# Make the move
-
-#print(board)
-
-
-#how many moves are available?
-#print(moves.count())
-
-#iterate over all the moves
-#for move in moves: 
-#    
-#    #display the move
-#    print(move)    #save the current position
-#    current_board = board
-#    
-#    #do the move
-#    board.push(move)
-#    
-#    #display the board
-#    print(board)
-#    
-#    #number of black moves
-#    print("Black moves:" + str(board.legal_moves.count()))
-#    
-#    #undo the move
-#    board.pop()
-#    
-#    #do we have a winner?
-#    if (board.is_game_over()):
-#        print("The game is over")
-#        print(board.result())
-    
