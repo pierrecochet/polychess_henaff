@@ -1,6 +1,8 @@
+# =============================================================================
+# VALUES OF EACH PIECE DEPENDING ON THEIR POSITION
+# =============================================================================
 
-
-pointsKing=[[ -3.0, -4.0, -4.0, -5.0, -5.0, -4.0, -4.0, -3.0],
+valuesKing=[[ -3.0, -4.0, -4.0, -5.0, -5.0, -4.0, -4.0, -3.0],
             [ -3.0, -4.0, -4.0, -5.0, -5.0, -4.0, -4.0, -3.0],
             [ -3.0, -4.0, -4.0, -5.0, -5.0, -4.0, -4.0, -3.0],
             [ -3.0, -4.0, -4.0, -5.0, -5.0, -4.0, -4.0, -3.0],
@@ -9,7 +11,7 @@ pointsKing=[[ -3.0, -4.0, -4.0, -5.0, -5.0, -4.0, -4.0, -3.0],
             [  2.0,  2.0,  0.0,  0.0,  0.0,  0.0,  2.0,  2.0],
             [  2.0,  3.0,  1.0,  0.0,  0.0,  1.0,  3.0,  2.0]]
 
-pointsQueen=[[ -2.0, -1.0, -1.0, -0.5, -0.5, -1.0, -1.0, -2.0],
+valuesQueen=[[ -2.0, -1.0, -1.0, -0.5, -0.5, -1.0, -1.0, -2.0],
              [ -1.0,  0.0,  0.0,  0.0,  0.0,  0.0,  0.0, -1.0],
              [ -1.0,  0.0,  0.5,  0.5,  0.5,  0.5,  0.0, -1.0],
              [ -0.5,  0.0,  0.5,  0.5,  0.5,  0.5,  0.0, -0.5],
@@ -18,7 +20,7 @@ pointsQueen=[[ -2.0, -1.0, -1.0, -0.5, -0.5, -1.0, -1.0, -2.0],
              [ -1.0,  0.0,  0.5,  0.0,  0.0,  0.0,  0.0, -1.0],
              [ -2.0, -1.0, -1.0, -0.5, -0.5, -1.0, -1.0, -2.0]]
 
-pointsRook=[[  0.0,  0.0,  0.0,  0.0,  0.0,  0.0,  0.0,  0.0],
+valuesRook=[[  0.0,  0.0,  0.0,  0.0,  0.0,  0.0,  0.0,  0.0],
             [  0.5,  1.0,  1.0,  1.0,  1.0,  1.0,  1.0,  0.5],
             [ -0.5,  0.0,  0.0,  0.0,  0.0,  0.0,  0.0, -0.5],
             [ -0.5,  0.0,  0.0,  0.0,  0.0,  0.0,  0.0, -0.5],
@@ -27,7 +29,7 @@ pointsRook=[[  0.0,  0.0,  0.0,  0.0,  0.0,  0.0,  0.0,  0.0],
             [ -0.5,  0.0,  0.0,  0.0,  0.0,  0.0,  0.0, -0.5],
             [  0.0,   0.0, 0.0,  0.5,  0.5,  0.0,  0.0,  0.0]]
 
-pointsBishop=[[ -2.0, -1.0, -1.0, -1.0, -1.0, -1.0, -1.0, -2.0],
+valuesBishop=[[ -2.0, -1.0, -1.0, -1.0, -1.0, -1.0, -1.0, -2.0],
               [ -1.0,  0.0,  0.0,  0.0,  0.0,  0.0,  0.0, -1.0],
               [ -1.0,  0.0,  0.5,  1.0,  1.0,  0.5,  0.0, -1.0],
               [ -1.0,  0.5,  0.5,  1.0,  1.0,  0.5,  0.5, -1.0],
@@ -36,7 +38,7 @@ pointsBishop=[[ -2.0, -1.0, -1.0, -1.0, -1.0, -1.0, -1.0, -2.0],
               [ -1.0,  0.5,  0.0,  0.0,  0.0,  0.0,  0.5, -1.0],
               [ -2.0, -1.0, -1.0, -1.0, -1.0, -1.0, -1.0, -2.0]]
 
-pointsKnight=[[-5.0, -4.0, -3.0, -3.0, -3.0, -3.0, -4.0, -5.0],
+valuesKnight=[[-5.0, -4.0, -3.0, -3.0, -3.0, -3.0, -4.0, -5.0],
               [-4.0, -2.0,  0.0,  0.0,  0.0,  0.0, -2.0, -4.0],
               [-3.0,  0.0,  1.0,  1.5,  1.5,  1.0,  0.0, -3.0],
               [-3.0,  0.5,  1.5,  2.0,  2.0,  1.5,  0.5, -3.0],
@@ -45,7 +47,7 @@ pointsKnight=[[-5.0, -4.0, -3.0, -3.0, -3.0, -3.0, -4.0, -5.0],
               [-4.0, -2.0,  0.0,  0.5,  0.5,  0.0, -2.0, -4.0],
               [-5.0, -4.0, -3.0, -3.0, -3.0, -3.0, -4.0, -5.0]]
 
-pointsPawn=[[0.0,  0.0,  0.0,  0.0,  0.0,  0.0,  0.0,  0.0],
+valuesPawn=[[0.0,  0.0,  0.0,  0.0,  0.0,  0.0,  0.0,  0.0],
             [5.0,  5.0,  5.0,  5.0,  5.0,  5.0,  5.0,  5.0],
             [1.0,  1.0,  2.0,  3.0,  3.0,  2.0,  1.0,  1.0],
             [0.5,  0.5,  1.0,  2.5,  2.5,  1.0,  0.5,  0.5],
@@ -57,6 +59,15 @@ pointsPawn=[[0.0,  0.0,  0.0,  0.0,  0.0,  0.0,  0.0,  0.0],
 
 
 def boardToArray(board): 
+    """
+    Function that plays a chess game until the game is over
+    Parameters :
+        -currentBoard : the current board
+        -playerTypeW : the type of the white player
+        -playerTypeB : the type of the black player
+    Returns :
+        This function doesn't return anything.
+    """
     #remplacement des nombres dans la chaine par un nombre de tirets équivalent
     board = board.replace("1","-").replace("2","--").replace("3","---").replace("4","----")\
         .replace("5","-----").replace("6","------").replace("7","-------").replace("8","--------")
@@ -91,29 +102,29 @@ def returnBlackPlayer(arrayBoard):
 def getValueCell(cell,i,j):
     valueCell=0
     if "p" in cell:
-        valueCell+=(-1)*(10+pointsPawn[i][j])
+        valueCell+=(-1)*(10+valuesPawn[i][j])
     if "P" in cell:
-        valueCell+=10+pointsPawn[i][j]
+        valueCell+=10+valuesPawn[i][j]
     if "r" in cell:
-        valueCell+=(-1)*(51+pointsRook[i][j])
+        valueCell+=(-1)*(51+valuesRook[i][j])
     if "R" in cell:
-        valueCell+=51+pointsRook[i][j]
+        valueCell+=51+valuesRook[i][j]
     if "n" in cell:
-        valueCell+=(-1)*(32+pointsKnight[i][j])
+        valueCell+=(-1)*(32+valuesKnight[i][j])
     if "N" in cell:
-        valueCell+=32+pointsKnight[i][j]
+        valueCell+=32+valuesKnight[i][j]
     if "b" in cell:
-        valueCell+=(-1)*(33.3+pointsBishop[i][j])
+        valueCell+=(-1)*(33.3+valuesBishop[i][j])
     if "B" in cell:
-        valueCell+=33.3+pointsBishop[i][j]
+        valueCell+=33.3+valuesBishop[i][j]
     if "q" in cell:
-        valueCell+=(-1)*(88+pointsQueen[i][j])
+        valueCell+=(-1)*(88+valuesQueen[i][j])
     if "Q" in cell:
-        valueCell+=88+pointsQueen[i][j]
+        valueCell+=88+valuesQueen[i][j]
     if "k" in cell:
-        valueCell+=(-1)*(900+pointsKing[i][j])
+        valueCell+=(-1)*(900+valuesKing[i][j])
     if "K" in cell:
-        valueCell+=900+pointsKing[i][j]
+        valueCell+=900+valuesKing[i][j]
     return valueCell
 
 def getBoardEval(board):

@@ -153,11 +153,11 @@ def playMove(currentBoard,move):
 
 def getCurrentPlayer(currentBoard, playerTypeW,playerTypeB ):
     """
-    Function that plays the move passed in parameter in the current board
+    Function that returns the type of the current player (MinMax, human, random...) and its color
     Parameters :
         -currentBoard : the current board
-        -typeJoueurW : type of the white player
-        -typeJoueurB : type of the black player
+        -playerTypeW : type of the white player
+        -playerTypeB : type of the black player
     Returns :
         This function doesn't return anything.
     """
@@ -183,48 +183,61 @@ def gameOver(currentBoard,typeCurrentPlayer):
         #move to play anymore
     if(typeCurrentPlayer == 1 or typeCurrentPlayer == 2):
         if (getMove(currentBoard,typeCurrentPlayer) is None):
-            return [True, "GAME OVER : No move has been found in the Polyglot book."]
+            return [True, "No move has been found in the Polyglot book."]
     #If the player plays with something else than ONLY PolyGlot (MinMax, console...)
     else:
         if(currentBoard.is_stalemate()):
-            return [True, "GAME OVER : Stalemate"]
+            return [True, "Stalemate"]
         if(currentBoard.is_insufficient_material()):
-            return [True, "GAME OVER : Insufficient material"]
+            return [True, "Insufficient material"]
         if(currentBoard.is_checkmate()):
-            return [True, "GAME OVER : Checkmate"]
+            return [True, "Checkmate"]
         if(currentBoard.is_seventyfive_moves()):
-            return [True, "GAME OVER : The last 75 consecutive moves have been made by each player \
-                    without the movement of any pawn and without the capture of any piece."]
+            return [True, "The last 75 consecutive moves have been made by each player \
+without the movement of any pawn and without the capture of any piece."]
         if(currentBoard.is_fivefold_repetition()):
-            return [True, "GAME OVER : The same position occured 5 times."]
+            return [True, "The same position occured 5 times."]
     return [False,""]
 
-def chessGame(currentBoard,typeJoueurW,typeJoueurB):
-    #Trouve le type du joueur actuel 
-    typeCurrentPlayer=typeJoueurW
-    colorCurrentPlayer=getCurrentPlayer(currentBoard,typeJoueurW,typeJoueurB)[1]
-    numeroTour=1
-    print("Début de la partie :")
+def chessGame(currentBoard, playerTypeW,playerTypeB ):
+    """
+    Function that plays a chess game until the game is over
+    Parameters :
+        -currentBoard : the current board
+        -playerTypeW : the type of the white player
+        -playerTypeB : the type of the black player
+    Returns :
+        This function doesn't return anything.
+    """
+    typeCurrentPlayer=getCurrentPlayer(currentBoard,playerTypeW,playerTypeB)[0]
+    colorCurrentPlayer=getCurrentPlayer(currentBoard,playerTypeW,playerTypeB)[1]
+    turnNumber=1
+    print("Beginning of the game :")
+    #prints the beginning board
     print(currentBoard)
-    #Boucle du jeu
+    #Game loop
+    #When gameOver(currentBoard,typeCurrentPlayer)[0] == True, the game is over :  "we" go out of the loop.
     while gameOver(currentBoard,typeCurrentPlayer)[0] == False:
-        
+        #Find the next move to play for the current player
+        move = getMove(currentBoard,typeCurrentPlayer)
+        #Plays this move
+        playMove(currentBoard,move)     
+        #Displays the turn number if it's the white player turn to play.
         if(colorCurrentPlayer=="W"):
             print("-----------------------")
-            print("TOUR",numeroTour)
-            print("Coup BLANC :")
+            print("TURN NUMBER",turnNumber)
+            print("\nWHITE MOVE :", move)
         else:
-            print("\nCoup NOIR:")
-            numeroTour+=1
-        playMove(currentBoard,getMove(currentBoard,typeCurrentPlayer))       
-        if currentBoard.turn:
-            typeCurrentPlayer=typeJoueurW
-        else:
-            typeCurrentPlayer=typeJoueurB
+            print("\nBLACK MOVE:", move)
+            turnNumber+=1
+        #Print the new board, after the move have been played
         print(currentBoard)
-        typeCurrentPlayer=getCurrentPlayer(currentBoard,typeJoueurW,typeJoueurB)[0]
-        colorCurrentPlayer=getCurrentPlayer(currentBoard,typeJoueurW,typeJoueurB)[1]
-    print("Fin de la partie : ",gameOver(currentBoard,typeCurrentPlayer)[1])
+        #sets the type and the color of the "new" current player        
+        typeCurrentPlayer=getCurrentPlayer(currentBoard,playerTypeW,playerTypeB)[0]
+        colorCurrentPlayer=getCurrentPlayer(currentBoard,playerTypeW,playerTypeB)[1]
+        
+    #Prints GAME OVER when the game is over, and a message to explain why the game is over, depending on the game 
+    print("GAME OVER : ",gameOver(currentBoard,typeCurrentPlayer)[1])
             
     
 # =============================================================================
@@ -269,11 +282,12 @@ def createPGN(board, eventName=None, siteName=None, datePGN=None, roundNum=None,
     f.write(str(game))
     f.close()
     
-
+    
 board=chess.Board()
 board2 =chess.Board("rn1q1rk1/pppbb1pp/4pn2/3p1p2/2PP4/BP3NP1/P3PPBP/RN1Q1RK1 b - - 2 8")
 
 #print(chess.Move.from_uci("d2d4"))
+
 chessGame(board, 3,3)
 createPGN(board, eventName = "Coupe Du Monde", roundNum = "3")
 
