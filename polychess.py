@@ -3,9 +3,12 @@
 import chess
 #used to access Polyglot book
 import chess.polyglot
+import chess.pgn
 import random
 import minMax
 import evaluation as ev
+import os
+import errno
 
 
 def findBestMovePolyglot(board):
@@ -236,13 +239,43 @@ def chessGame(currentBoard, playerTypeW,playerTypeB ):
     print("GAME OVER : ",gameOver(currentBoard,typeCurrentPlayer)[1])
             
     
+# =============================================================================
+#  Storage of every game played in PGN format
+# =============================================================================
+
+
+def createPGN(board, eventName=None, siteName=None, datePGN=None, roundNum=None, whiteName=None, blackName=None):
+    game = chess.pgn.Game.from_board(board)
+    game.headers["Event"]='?' if eventName is None else eventName
+    game.headers["Site"]='?'  if siteName  is None else siteName
+    game.headers["Round"]='?' if roundNum  is None else roundNum
+    game.headers["White"]='?' if whiteName is None else whiteName
+    game.headers["Black"]='?' if blackName is None else blackName
+    
+    
+    ext = '.txt'
+    directory = "games/"
+    filename = directory + str(game.headers["Event"]) + " " + str(game.headers["Round"])+ ext
+    if not os.path.exists(os.path.dirname(filename)):
+        try:
+            os.makedirs(os.path.dirname(filename))
+        except OSError as exc : 
+            if exc.errno != errno.EEXIST:
+                raise
+    
+    f = open(filename, "w+")
+    f.write(str(game))
+    f.close()
     
     
 board=chess.Board()
 board2 =chess.Board("rn1q1rk1/pppbb1pp/4pn2/3p1p2/2PP4/BP3NP1/P3PPBP/RN1Q1RK1 b - - 2 8")
 
 #print(chess.Move.from_uci("d2d4"))
-chessGame(board2, 3,3)
+
+chessGame(board, 3,3)
+createPGN(board, eventName = "Coupe Du Monde", roundNum = "3")
+
 #-1:Joué par Polyglot (meilleur coup d'après lui)
 #-2:Joué par Polyglot (coup aléatoire parmis les coups qu'il propose)
 #-3:Joué totalement aléatoirement (parmi les coups possibles)
@@ -252,7 +285,11 @@ chessGame(board2, 3,3)
             
         
         
-    
+
+
+
+#def addMoveToPGN():
+
 
 # Make the move
 

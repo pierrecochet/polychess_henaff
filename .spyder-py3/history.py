@@ -63,3 +63,9 @@ board2
 runfile('E:/Cours/ProjChess/polychess_henaff/minMax.py', wdir='E:/Cours/ProjChess/polychess_henaff')
 board1
 runfile('E:/Cours/ProjChess/polychess_henaff/minMax.py', wdir='E:/Cours/ProjChess/polychess_henaff')
+%clear
+runfile('E:/Cours/ProjChess/polychess_henaff/polychess.py', wdir='E:/Cours/ProjChess/polychess_henaff')
+%clear
+runfile('E:/Cours/ProjChess/polychess_henaff/polychess.py', wdir='E:/Cours/ProjChess/polychess_henaff')
+chess.pgn.Game.from_board(board)
+runfile('E:/Cours/ProjChess/polychess_henaff/polychess.py', wdir='E:/Cours/ProjChess/polychess_henaff')
