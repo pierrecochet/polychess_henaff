@@ -9,6 +9,7 @@ import minMax
 import evaluation as ev
 import os
 import errno
+import datetime
 
 
 def findBestMovePolyglot(board):
@@ -232,13 +233,27 @@ def chessGame(currentBoard,typeJoueurW,typeJoueurB):
 
 
 def createPGN(board, eventName=None, siteName=None, datePGN=None, roundNum=None, whiteName=None, blackName=None):
+    """
+    Function that creates a file filled with the entire game in PGN format
+    Parameters :
+        -board : the current board
+        -eventName : Name of the event
+        -siteName  : Name of the site
+        -datePGN   : date of the game, in PGN format
+        -roundNum  : Number of the current round
+        -whiteName : Name of the white player
+        -blackName : Name of the black player
+    Returns :
+        -Nothing but the new file created in the games directory
+    """
     game = chess.pgn.Game.from_board(board)
+    nowPGN = datetime.datetime.now().strftime('%Y.%m.%d')
     game.headers["Event"]='?' if eventName is None else eventName
     game.headers["Site"]='?'  if siteName  is None else siteName
     game.headers["Round"]='?' if roundNum  is None else roundNum
     game.headers["White"]='?' if whiteName is None else whiteName
     game.headers["Black"]='?' if blackName is None else blackName
-    
+    game.headers["Date"]=nowPGN if datePGN is None else datePGN
     
     ext = '.txt'
     directory = "games/"
@@ -258,7 +273,6 @@ def createPGN(board, eventName=None, siteName=None, datePGN=None, roundNum=None,
 board=chess.Board()
 board2 =chess.Board("rn1q1rk1/pppbb1pp/4pn2/3p1p2/2PP4/BP3NP1/P3PPBP/RN1Q1RK1 b - - 2 8")
 
-chess.pgn.Game.from_board()
 #print(chess.Move.from_uci("d2d4"))
 chessGame(board, 3,3)
 createPGN(board, eventName = "Coupe Du Monde", roundNum = "3")
@@ -270,10 +284,6 @@ createPGN(board, eventName = "Coupe Du Monde", roundNum = "3")
 #-5:Joué avec MinMax pour trouver le meilleur coup
 #-6:Joué avec Polyglot puis MinMax lorsque Polyglot ne trouve plus rien
             
-        
-        
-
-
 
 #def addMoveToPGN():
 
