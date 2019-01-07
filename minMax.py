@@ -16,7 +16,7 @@ def minMax(board, depth):
     """
     moves = list(board.legal_moves)
     if depth == 0 or moves == 0:
-        return (ev.getBoardEval(board), None)
+        return (ev.getBoardEval(board.fen()), None)
     
     
     if board.turn :
@@ -63,7 +63,7 @@ def minMaxAlphaBeta(board, depth, alpha, beta):
     moves = list(board.legal_moves)
     if depth == 0 or moves == 0:
         #When we are at the "deepest" level of the reccurence, returns the evaluation of the current board
-        return (ev.getBoardEval(board), None)
+        return (ev.getBoardEval(board.fen()), None)
     
     if board.turn :
         bestMove = None

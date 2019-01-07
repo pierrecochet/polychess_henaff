@@ -158,13 +158,14 @@ def getBoardEval(board):
     """
     Function that returns the total value of the board, by summing the value of each cell
     Parameters :
-        -board : the current board, as a FEN string
+        -board : the current board as a FEN string
     Returns :
         - the value of the current board, which is a float
             if it's positive, the white player's pieces have more value than the black ones
             if it's negative, the black player's pieces have more value than the white ones
     """
-    listBoard=boardToArray(board.fen())
+    
+    listBoard=boardToArray(board)
     reversedBlack=flipBlackPieces(listBoard)
     valueEval=0
     for i,line in enumerate(reversedBlack):
