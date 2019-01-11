@@ -46,7 +46,7 @@ Then compile and execut polychess.py.
 ## New techniques/skills/terms to get acquainted with
 
 * Chess (maybe) (https://github.com/pierrecochet/polychess_henaff/wiki/Chess-Rules-&-Basics)
-* Universal Chess Interface (UCI) (http://wbec-ridderkerk.nl/html/UCIProtocol.html)
+* Universal Chess Interface (UCI) (https://github.com/pierrecochet/polychess_henaff/wiki/Universal-Chess-Interface-(UCI))
 * Portable General Notation (PGN) (https://github.com/pierrecochet/polychess_henaff/wiki/PGN)
 * Board representation (bitboards, 0x88, 120-square representation, 64-square representation)
 * MinMax (Negamax) (https://github.com/pierrecochet/polychess_henaff/wiki/MinMax)
