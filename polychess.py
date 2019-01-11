@@ -298,7 +298,7 @@ def createPGN(board, eventName=None, siteName=None, datePGN=None, roundNum=None,
 board=chess.Board()
 board2 =chess.Board("rn1q1rk1/pppbb1pp/4pn2/3p1p2/2PP4/BP3NP1/P3PPBP/RN1Q1RK1 b - - 2 8")
 
-chessGame(board, 5,3)
+chessGame(board, 5,6)
 
 #createPGN(board, eventName = "Coupe Du Monde", roundNum = "3")
 
