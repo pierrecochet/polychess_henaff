@@ -69,3 +69,4 @@ runfile('E:/Cours/ProjChess/polychess_henaff/polychess.py', wdir='E:/Cours/ProjC
 runfile('E:/Cours/ProjChess/polychess_henaff/polychess.py', wdir='E:/Cours/ProjChess/polychess_henaff')
 chess.pgn.Game.from_board(board)
 runfile('E:/Cours/ProjChess/polychess_henaff/polychess.py', wdir='E:/Cours/ProjChess/polychess_henaff')
+runfile('E:/Cours/ProjChess/polychess_henaff/lichess.py', wdir='E:/Cours/ProjChess/polychess_henaff')
