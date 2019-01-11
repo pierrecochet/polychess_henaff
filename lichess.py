@@ -20,7 +20,7 @@ class Lichess:
     #    print(r.text)
     #    r2 = requests.get("https://lichess.org/api/stream/event", headers=header)
     #    print(r2.text)
-        r = requests.post("https://lichess.org/api/bot/game/RpVnmjWT/move/h7h5", headers=header)
+        r = requests.post("https://lichess.org/api/bot/game/RpVnmjWT/move/h7h5", headers=self.header)
         print(r.text)
         
         
@@ -29,13 +29,13 @@ class Lichess:
         print("retour play move : " + str(r.text))
         
     def getStatusGame(self):
-        r = requests.post("https://lichess.org/api/bot/game/stream/" + self.gameId, headers=self.header)
+        r = requests.get("https://lichess.org/api/bot/game/stream/" + self.gameId, headers=self.header, stream=True)
         print("Status : ")
-        print(r)
+        print(r.text)
         
 
 lich = Lichess()
-    
+mov = "d8c7"
 lich.getStatusGame()
 
 
