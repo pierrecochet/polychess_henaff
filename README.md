@@ -45,13 +45,13 @@ Then compile and execut polychess.py.
 
 ## New techniques/skills/terms to get acquainted with
 
-* Chess (maybe)
-* Universal Chess Interface (UCI) (http://wbec-ridderkerk.nl/html/UCIProtocol.html)
-* Portable General Notation (PGN)
+* Chess (maybe) (https://github.com/pierrecochet/polychess_henaff/wiki/Chess-Rules-&-Basics)
+* Universal Chess Interface (UCI) (https://github.com/pierrecochet/polychess_henaff/wiki/Universal-Chess-Interface-(UCI))
+* Portable General Notation (PGN) (https://github.com/pierrecochet/polychess_henaff/wiki/PGN)
 * Board representation (bitboards, 0x88, 120-square representation, 64-square representation)
-* MinMax (Negamax)
-* Alpha-Beta pruning
-* Chess rules (five fold repetition, seventy-five moves)
+* MinMax (Negamax) (https://github.com/pierrecochet/polychess_henaff/wiki/MinMax)
+* Alpha-Beta pruning (https://github.com/pierrecochet/polychess_henaff/wiki/AlphaBeta)
+* Chess rules (five fold repetition, seventy-five moves) (https://github.com/pierrecochet/polychess_henaff/wiki/Chess-Rules-&-Basics)
 * Opening book (Polyglot)
 * Forsyth-Edwards Notation (FEN) (https://www.chessprogramming.org/Forsyth-Edwards_Notation)
 * Piece-Square table
@@ -60,5 +60,3 @@ Then compile and execut polychess.py.
 * Transposition table
 * Zobrist key
 * Perft
-
-
